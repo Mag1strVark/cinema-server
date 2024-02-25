@@ -7,8 +7,12 @@ import { UserModule } from './user/user.module'
 import { RolesModule } from './roles/roles.module'
 import { UserTokenModule } from './user-token/user-token.module'
 import { Ys3Module } from './ys3/ys3.module'
+import { UserEntity } from './user/entities/user.entity'
+import { RoleEntity } from './roles/entities/role.entity'
+import { UserRoleEntity } from './roles/entities/user-role.entitiy'
+import { YS3Entity } from './ys3/entities/ys3.entity'
 
-const entities = []
+const entities = [UserEntity, RoleEntity, UserRoleEntity, YS3Entity]
 
 @Module({
   imports: [
