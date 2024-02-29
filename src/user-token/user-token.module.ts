@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common'
 import { UserTokenService } from './user-token.service'
-import { UserTokenController } from './user-token.controller'
+import { SequelizeModule } from '@nestjs/sequelize'
+import { UserTokenEntity } from './entities/user-token.entity'
 
 @Module({
-  controllers: [UserTokenController],
   providers: [UserTokenService],
+  exports: [UserTokenService],
+  imports: [SequelizeModule.forFeature([UserTokenEntity])],
 })
 export class UserTokenModule {}

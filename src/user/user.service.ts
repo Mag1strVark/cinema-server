@@ -1,15 +1,25 @@
 import { Injectable } from '@nestjs/common'
-import { UpdateUserDto } from './dto/update-user.dto'
 import { InjectModel } from '@nestjs/sequelize'
 import { UserEntity } from './entities/user.entity'
+import { CreateUserDto } from './dto/create-user.dto'
 
 @Injectable()
 export class UserService {
   constructor(@InjectModel(UserEntity) private userRepository: typeof UserEntity) {}
 
-  findAll() {}
+  async findOne(id: string): Promise<UserEntity> {
+    return await this.userRepository.findByPk(id)
+  }
 
-  findOne(id: number) {}
+  async findByEmail(email: string): Promise<UserEntity> {
+    return await this.userRepository.findOne({ where: { email } })
+  }
 
-  update(id: number, updateUserDto: UpdateUserDto) {}
+  async create(dto: CreateUserDto): Promise<UserEntity> {
+    return await this.userRepository.create(dto)
+  }
+
+  async findById(id: string): Promise<UserEntity> {
+    return await this.userRepository.findOne({ where: { id } })
+  }
 }

@@ -10,7 +10,7 @@ async function bootstrap() {
   app.enableCors({ credentials: true, origin: process.env.CLIENT_URL })
   app.use(cookieParser())
   const config = new DocumentBuilder()
-    .setTitle('Архитектура энергии')
+    .setTitle('Кинотеатр')
     .setDescription('Документация REST API')
     .setVersion('1.0')
     .addBearerAuth()

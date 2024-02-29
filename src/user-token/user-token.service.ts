@@ -1,26 +1,33 @@
 import { Injectable } from '@nestjs/common'
-import { CreateUserTokenDto } from './dto/create-user-token.dto'
-import { UpdateUserTokenDto } from './dto/update-user-token.dto'
+import { InjectModel } from '@nestjs/sequelize'
+import { UserTokenEntity } from './entities/user-token.entity'
 
 @Injectable()
 export class UserTokenService {
-  create(createUserTokenDto: CreateUserTokenDto) {
-    return 'This action adds a new userToken'
+  constructor(
+    @InjectModel(UserTokenEntity) private userTokenRepository: typeof UserTokenEntity,
+  ) {}
+
+  async saveToken(userId: string, refreshToken: string) {
+    const tokenData = await this.userTokenRepository.findOne({
+      where: { user_id: userId },
+    })
+    if (tokenData) {
+      tokenData.refresh_token = refreshToken
+      await tokenData.save()
+    } else {
+      await this.userTokenRepository.create({
+        user_id: userId,
+        refresh_token: refreshToken,
+      })
+    }
   }
 
-  findAll() {
-    return `This action returns all userToken`
+  async findToken(refreshToken: string) {
+    return this.userTokenRepository.findOne({ where: { refresh_token: refreshToken } })
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} userToken`
-  }
-
-  update(id: number, updateUserTokenDto: UpdateUserTokenDto) {
-    return `This action updates a #${id} userToken`
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} userToken`
+  async removeToken(refreshToken: string) {
+    return this.userTokenRepository.destroy({ where: { refresh_token: refreshToken } })
   }
 }
