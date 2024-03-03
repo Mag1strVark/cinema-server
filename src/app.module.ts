@@ -6,8 +6,22 @@ import { CinemaModule } from './cinema/cinema.module'
 import { UserModule } from './user/user.module'
 import { UserTokenModule } from './user-token/user-token.module'
 import { UserEntity } from './user/entities/user.entity'
+import { CinemaEntity } from './cinema/entities/cinema.entity'
+import { PlaceEntity } from './cinema/entities/place.entity'
+import { ScheduleEntity } from './cinema/entities/schedule.entity'
+import { ScheduleSeancesEntity } from './cinema/entities/schedule-seances.entity'
+import { SeanceEntity } from './cinema/entities/seance.entity'
+import { SeancePlaceEntity } from './cinema/entities/seance-place.entity'
 
-const entities = [UserEntity]
+const entities = [
+  UserEntity,
+  CinemaEntity,
+  PlaceEntity,
+  ScheduleEntity,
+  ScheduleSeancesEntity,
+  SeanceEntity,
+  SeancePlaceEntity,
+]
 
 @Module({
   imports: [
