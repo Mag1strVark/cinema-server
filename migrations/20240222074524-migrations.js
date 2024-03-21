@@ -1,22 +1,65 @@
-'use strict';
+'use strict'
+
+const { v4: uuidv4 } = require('uuid')
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-     */
+  async up(queryInterface, Sequelize) {
+    const apiUrl = 'http://localhost:5000/uploads'
+
+    const forrestGumpId = uuidv4()
+    const intouchbleId = uuidv4()
+    const openheimerId = uuidv4()
+    const greenMileId = uuidv4()
+    const shawshankId = uuidv4()
+
+    await queryInterface.bulkInsert('cinema', [
+      {
+        id: greenMileId,
+        name: 'Зеленая миля',
+        releaseDate: '06.12.1999',
+        img: `${apiUrl}/theGreenMile.webp`,
+        description:
+          'Пол Эджкомб — начальник блока смертников в тюрьме «Холодная гора», каждый из узников которого однажды проходит «зеленую милю» по пути к месту казни. Пол повидал много заключённых и надзирателей за время работы. Однако гигант Джон Коффи, обвинённый в страшном преступлении, стал одним из самых необычных обитателей блока.',
+      },
+      {
+        id: intouchbleId,
+        name: '1+1',
+        releaseDate: '23.09.2011',
+        img: `${apiUrl}/Intouchables.webp`,
+        description:
+          'Пострадав в результате несчастного случая, богатый аристократ Филипп нанимает в помощники человека, который менее всего подходит для этой работы, – молодого жителя предместья Дрисса, только что освободившегося из тюрьмы. Несмотря на то, что Филипп прикован к инвалидному креслу, Дриссу удается привнести в размеренную жизнь аристократа дух приключений.',
+      },
+      {
+        id: shawshankId,
+        name: 'Побег из Шоушенка',
+        releaseDate: '10.09.1994',
+        img: `${apiUrl}/theShawshankRedemption.webp`,
+        description:
+          'Бухгалтер Энди Дюфрейн обвинён в убийстве собственной жены и её любовника. Оказавшись в тюрьме под названием Шоушенк, он сталкивается с жестокостью и беззаконием, царящими по обе стороны решётки. Каждый, кто попадает в эти стены, становится их рабом до конца жизни. Но Энди, обладающий живым умом и доброй душой, находит подход как к заключённым, так и к охранникам, добиваясь их особого к себе расположения.',
+      },
+      {
+        id: forrestGumpId,
+        name: 'Форрест Гамп',
+        releaseDate: '23.06.1994',
+        img: `${apiUrl}/forrestGump.webp`,
+        description:
+          'Сидя на автобусной остановке, Форрест Гамп — не очень умный, но добрый и открытый парень — рассказывает случайным встречным историю своей необыкновенной жизни.\n' +
+          '\n' +
+          'С самого малолетства парень страдал от заболевания ног, соседские мальчишки дразнили его, но в один прекрасный день Форрест открыл в себе невероятные способности к бегу. Подруга детства Дженни всегда его поддерживала и защищала, но вскоре дороги их разошлись.',
+      },
+      {
+        id: openheimerId,
+        name: 'Оппенгеймер',
+        releaseDate: '10.07.2023',
+        img: `${apiUrl}/forrestGump.webp`,
+        description:
+          'История жизни американского физика-теоретика Роберта Оппенгеймера, который во времена Второй мировой войны руководил Манхэттенским проектом — секретными разработками ядерного оружия.',
+      },
+    ])
   },
 
-  async down (queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
-  }
-};
+  async down(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete('cinema', null, {})
+  },
+}
