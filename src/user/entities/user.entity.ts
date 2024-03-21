@@ -19,7 +19,7 @@ export class UserEntity extends Model<UserEntity, CreateUserDto> {
   @ApiProperty({ description: 'Имя' })
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true,
   })
   name: string
 

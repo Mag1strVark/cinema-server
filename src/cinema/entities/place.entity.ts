@@ -27,10 +27,10 @@ export class PlaceEntity extends Model<PlaceEntity> {
 
   @ApiProperty({ description: 'Цена' })
   @Column({
-    type: DataType.NUMBER,
+    type: DataType.STRING,
     allowNull: false,
   })
-  price: number
+  price: string
 
   @ApiProperty({ example: 'OPEN', description: 'тип OPEN | CLOSE' })
   @Column({

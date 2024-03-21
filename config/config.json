@@ -2,9 +2,9 @@
   "development": {
     "username": "root",
     "password": "root",
-    "database": "cinema-db",
+    "database": "cinema",
     "host": "localhost",
     "dialect": "postgres",
-    "port": 10001
+    "port": 5432
   }
 }

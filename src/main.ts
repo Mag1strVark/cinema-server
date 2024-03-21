@@ -3,7 +3,6 @@ import { AppModule } from './app.module'
 import * as process from 'process'
 import * as express from 'express'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
-import * as cookieParser from 'cookie-parser'
 import * as path from 'path'
 
 async function bootstrap() {
@@ -11,7 +10,6 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule)
   app.enableCors({ credentials: true, origin: process.env.CLIENT_URL })
   app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')))
-  app.use(cookieParser())
   const config = new DocumentBuilder()
     .setTitle('Кинотеатр')
     .setDescription('Документация REST API')

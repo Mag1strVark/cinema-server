@@ -25,7 +25,7 @@ export class CinemaEntity extends Model<CinemaEntity, CreateCinemaDto> {
 
   @ApiProperty({ description: 'Описание фильма' })
   @Column({
-    type: DataType.STRING,
+    type: DataType.TEXT,
     allowNull: false,
   })
   description: string
